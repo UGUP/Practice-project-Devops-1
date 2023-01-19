@@ -25,14 +25,15 @@ module "AS2_VPC" {
   }
 }
 
-data "aws_internet_gateway" "AS2_internet_gateway" {
-  vpc_id = module.AS2_VPC.vpc_id
-  }
 
 output "vpc_id" {
   value = module.AS2_VPC.vpc_id
 }
 
 output "igw_id" {
-  value = data.aws_internet_gateway.AS2_internet_gateway.id
+  value = module.AS2_VPC.igw_id
+}
+
+output "natgw_ids" {
+  value= module.AS2_VPC.natgw_ids
 }
