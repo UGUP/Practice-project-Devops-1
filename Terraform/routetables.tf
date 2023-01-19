@@ -27,12 +27,12 @@ resource "aws_route_table" "route-public_az-b" {
 #Asscociating public subnet1 and public subnet2 with the public route table
 
 resource "aws_route_table_association" "public-route-association-public-az-a" {
-  subnet_id      = aws_subnet.AS2_public_subnet_a.id
+  subnet_id      = data.aws_subnet.AS2_public_subnet_a.id
   route_table_id = aws_route_table.route-public_az-a.id
 }
 
 resource "aws_route_table_association" "public-route-association-public-az-b" {
-  subnet_id      = aws_subnet.AS2_public_subnet_b.id
+  subnet_id      = data.aws_subnet.AS2_public_subnet_b.id
   route_table_id = aws_route_table.route-public_az-b.id
 }
 
@@ -71,11 +71,11 @@ resource "aws_route_table" "route-private-az-b" {
 #Asscociating private subnet1 and private subnet2 with the private route table
 
 resource "aws_route_table_association" "private-route-association-az-a" {
-  subnet_id      = aws_subnet.AS2_private_subnet_a.id
+  subnet_id      = data.aws_subnet.AS2_private_subnet_a.id
   route_table_id = aws_route_table.route-private-az-a.id
 }
 
 resource "aws_route_table_association" "private-route-association-az-b" {
-  subnet_id      = aws_subnet.AS2_private_subnet_b.id
+  subnet_id      =  data.aws_subnet.AS2_private_subnet_b.id
   route_table_id = aws_route_table.route-private-az-b.id
 }
