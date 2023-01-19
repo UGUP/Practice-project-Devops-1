@@ -48,8 +48,8 @@ module "AS2-VPC" {
 
  # Here I am importing resources from networkresource.tf to created public and private 
  # subnets as per the availability zones
-  private_subnets = [aws_subnet.AS2_private_subnet_a.id,aws_subnet.AS2_private_subnet_b.id]
-  public_subnets  = [aws_subnet.AS2_public_subnet_a.id,aws_subnet.AS2_public_subnet_b.id]
+  private_subnets = [aws_subnet.AS2_private_subnet_a.cidr_block,aws_subnet.AS2_private_subnet_b.cidr_block]
+  public_subnets  = [aws_subnet.AS2_public_subnet_a.cidr_block,aws_subnet.AS2_public_subnet_b.cidr_block]
   azs             = ["us-east-1a","us-east-1b"]
 
   enable_nat_gateway = true
