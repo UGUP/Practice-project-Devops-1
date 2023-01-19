@@ -1,11 +1,7 @@
-# Resources created as per the availabilty ozones
-# Here 2 public and 2 private subnets are created in each Availability zone.
-
 
 # This is VPC module 
 # In this Vpc, public,private subnets , NAT and IGW is created 
 # The route tables are also created for both Public and private subnet
-
 
 module "AS2_VPC" {
   source = "terraform-aws-modules/vpc/aws"
@@ -13,45 +9,8 @@ module "AS2_VPC" {
   name = "AS2_VPC"
   cidr = "10.0.0.0/16"
 
- resource "aws_subnet" "AS2_private_subnet_a" {
-  vpc_id            = module.AS2_VPC.vpc_id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "us-east-1a"
-  tags = {
-    name="AS2_private_subnet_a"
-  }
-}
-
-resource "aws_subnet" "AS2_private_subnet_b" {
-  vpc_id            = module.AS2_VPC.vpc_id
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "us-east-1b"
-   tags = {
-    name="AS2_private_subnet_b"
-  }
-}
-resource "aws_subnet" "AS2_public_subnet_a" {
-  vpc_id            = module.AS2_VPC.vpc_id
-  cidr_block        = "10.0.101.0/24"
-  availability_zone = "us-east-1a"
-   tags = {
-    name="AS2_public_subnet_a"
-  }
-}
-resource "aws_subnet" "AS2_public_subnet_b" {
-  vpc_id            = module.AS2_VPC.vpc_id
-  cidr_block        = "10.0.102.0/24"
-  availability_zone = "us-east-1b"
-  tags = {
-    name="AS2_public_subnet_b"
-  }
-}
-
-
-
- # subnets are created as per the availability zones
-  private_subnets = [aws_subnet.AS2_private_subnet_a.cidr_block,aws_subnet.AS2_private_subnet_b.cidr_block]
-  public_subnets  = [aws_subnet.AS2_public_subnet_a.cidr_block,aws_subnet.AS2_public_subnet_b.cidr_block]
+  private_subnets = [data.aws_subnet.AS2_private_subnet_a.cidr_block,data.aws_subnet.AS2_private_subnet_b.cidr_block]
+  public_subnets  = [data.aws_subnet.AS2_public_subnet_a.cidr_block,data.aws_subnet.AS2_public_subnet_b.cidr_block]
   azs             = ["us-east-1a","us-east-1b"]
 
   enable_nat_gateway = true
