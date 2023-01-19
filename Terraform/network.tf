@@ -21,8 +21,8 @@ module "AS2_VPC" {
     Terraform = "true"
     Environment = "dev"
   }
- output "vpc_id" {
-  value = module.AS2_VPC.vpc_id
 }
 
+output "vpc_id" {
+  value = module.AS2_VPC.vpc_id
 }
