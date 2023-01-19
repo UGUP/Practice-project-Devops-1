@@ -16,6 +16,8 @@ module "AS2_VPC" {
   enable_nat_gateway = true
   enable_vpn_gateway = true
 
+
+
   tags = {
     name= "AS2_VPC"
     Terraform = "true"
@@ -23,6 +25,14 @@ module "AS2_VPC" {
   }
 }
 
+data "aws_internet_gateway" "AS2_internet_gateway" {
+  vpc_id = module.AS2_VPC.vpc_id
+  }
+
 output "vpc_id" {
   value = module.AS2_VPC.vpc_id
+}
+
+output "igw_id" {
+  value = data.aws_internet_gateway.AS2_internet_gateway.id
 }
