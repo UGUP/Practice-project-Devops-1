@@ -22,3 +22,6 @@ module "AS2_VPC" {
     Environment = "dev"
   }
 }
+output "vpc_id" {
+  value = module.AS2_VPC.vpc_id
+}
