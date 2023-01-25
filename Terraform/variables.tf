@@ -27,7 +27,7 @@ variable "instance_type" {
 }
 
 variable "key_name" {
-  default="bastion"
+  default = "test2"
 }
 
 variable "bits" {
