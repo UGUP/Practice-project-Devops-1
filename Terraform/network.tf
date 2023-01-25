@@ -4,14 +4,16 @@
 # The route tables are also created for both Public and private subnet
 
 module "AS2_VPC" {
-  source = "./modules/terraform-aws-vpc"
+  source = "terraform-aws-modules/vpc/aws"
 
   name = "AS2_VPC"
   cidr = var.VPC
 
   private_subnets = [var.private-subnet1,var.private-subnet2]
   public_subnets  = [var.public-subnet1,var.public-subnet2]
+  single_nat_gateway= true
   azs             = ["us-east-1a","us-east-1b"]
+
 
   
 
