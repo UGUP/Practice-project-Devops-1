@@ -7,7 +7,7 @@ module "AS2_VPC" {
   source = "terraform-aws-modules/vpc/aws"
 
   name = "AS2_VPC"
-  cidr = "10.0.0.0/16"
+  cidr = var.VPC
 
   private_subnets = [var.private-subnet1,var.private-subnet2]
   public_subnets  = [var.public-subnet1,var.public-subnet2]
@@ -32,10 +32,3 @@ output "vpc_id" {
   value = module.AS2_VPC.vpc_id
 }
 
-output "igw_id" {
-  value = module.AS2_VPC.igw_id
-}
-
-output "natgw_ids" {
-  value= module.AS2_VPC.natgw_ids
-}
