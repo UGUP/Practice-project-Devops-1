@@ -4,22 +4,19 @@ module "AS2_bastion_sg" {
   name        = "AS2_bastion_sg"
   description = "Security group for bastion instance"
   vpc_id      = module.AS2_VPC.vpc_id
- 
-  
-  ingress {
-    description      = "Self SSH into machine"
-    from_port        =  22
-    to_port          =  22
-    protocol         = "tcp"
-    ingress_with_self = module.AS2_bastion_instance.bastion_ip_address
-  }
 
-  egress {
-    from_port        =0
-    to_port          =0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
+  ingress_cidr_blocks      = [var.VPC]
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      description = "ssh"
+      #cidr_blocks = "0.0.0.0/0"
+      ingress_with_self = module.AS2_bastion_instance.bastion_ip_address
+    }
+  ]
+  egress_rules = [ "all-all"]
   
 }
 
