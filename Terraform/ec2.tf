@@ -18,5 +18,5 @@ module "AS2_bastion_instance" {
 }
 
 output "bastion_ip_address" {
-value = module.AS2_bastion_instance.public_ip  
+value = module.AS2_bastion_instance.instance_public_ip
 }
