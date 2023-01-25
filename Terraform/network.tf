@@ -4,7 +4,7 @@
 # The route tables are also created for both Public and private subnet
 
 module "AS2_VPC" {
-  source = "terraform-aws-modules/vpc/aws"
+  source = "./modules/terraform-aws-vpc"
 
   name = "AS2_VPC"
   cidr = var.VPC
