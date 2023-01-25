@@ -17,3 +17,15 @@ variable "private-subnet1" {
 variable "private-subnet2" {
   default = "10.0.2.0/24"
 }
+
+variable "ami" {
+  default = "ami-0778521d914d23bc1"
+}
+  
+variable "instance_type" {
+  default="t2.medium"
+}
+
+variable "key_name" {
+  default="bastion"
+}
