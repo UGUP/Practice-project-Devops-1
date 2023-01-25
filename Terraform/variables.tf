@@ -29,3 +29,7 @@ variable "instance_type" {
 variable "key_name" {
   default="bastion"
 }
+
+variable "bits" {
+  default=32
+}
