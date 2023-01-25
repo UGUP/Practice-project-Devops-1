@@ -9,9 +9,11 @@ module "AS2_VPC" {
   name = "AS2_VPC"
   cidr = "10.0.0.0/16"
 
-  private_subnets = [data.aws_subnet.AS2_private_subnet_a.cidr_block,data.aws_subnet.AS2_private_subnet_b.cidr_block]
-  public_subnets  = [data.aws_subnet.AS2_public_subnet_a.cidr_block,data.aws_subnet.AS2_public_subnet_b.cidr_block]
+  private_subnets = [var.private-subnet1,var.private-subnet2]
+  public_subnets  = [var.public-subnet1,var.public-subnet2]
   azs             = ["us-east-1a","us-east-1b"]
+
+  
 
   enable_nat_gateway = true
   enable_vpn_gateway = true
