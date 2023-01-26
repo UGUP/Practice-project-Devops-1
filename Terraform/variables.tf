@@ -33,3 +33,7 @@ variable "key_name" {
 variable "bits" {
   default=32
 }
+
+variable "my_ip" {
+  default = "0.0.0.0/0"
+}

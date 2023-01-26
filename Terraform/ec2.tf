@@ -17,11 +17,16 @@ module "AS2_bastion_instance" {
   monitoring             = true
   vpc_security_group_ids = [module.AS2_bastion_sg.security_group_id]
   subnet_id              = module.AS2_VPC.public_subnets[0]
-
   tags = {
     Terraform   = "true"
     Environment = "dev"
   }
+
+# provisioner "local-exec" {
+#     command = "MYIP=$(curl ifconfig.me); echo MYIP=$MYIP"
+#   }
+
+
 }
 
 # resource block for ec2 and eip association #

@@ -1,3 +1,7 @@
+provisioner "local-exec" {
+    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
+}
+
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
 
@@ -11,9 +15,10 @@ module "AS2_bastion_sg" {
       to_port     = 22
       protocol    = "tcp"
       description = "ssh"
-      cidr_blocks = ["${local_ip}/32"]
+      # cidr_blocks = ["${local_ip}/32"]
       #cidr_blocks = "${module.AS2_bastion_instance.public_ip}/${var.bits}"
      # self = true
+     cidr_blocks   = "${var.my_ip}/${var.bits}"
     }
   ]
   egress_rules = [ "all-all"]
