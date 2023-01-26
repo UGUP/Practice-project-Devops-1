@@ -17,8 +17,9 @@ module "AS2_bastion_sg" {
      # self = true
     #  cidr_blocks = local-exec.my_ip
      #cidr_blocks   = "${module.AS2_bastion_instance.my_ip}/${var.bits}"
-     # cidr_blocks = "${var.my_ip}/${var.bits}"
-   cidr_blocks = "${null_resource.get_ip_address.provisioner.output}"
+  #    # cidr_blocks = "${var.my_ip}/${var.bits}"
+  #  cidr_blocks = "${null_resource.get_ip_address.provisioner.output}"
+  cidr_blocks = "${trimspace(regex(null_resource.get_ip_address.provisioner.command,"my_ip=(.*)"))}/32"
      
     }
   ]
@@ -35,7 +36,7 @@ module "AS2_bastion_sg" {
  
 
 output "provisoner_output" {
-  value =  null_resource.get_ip_address.provisioner.output
+  value =  null_resource.get_ip_address.provisioner.command
 }
 
 
