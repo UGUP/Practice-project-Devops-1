@@ -18,7 +18,7 @@ module "AS2_bastion_sg" {
     #  cidr_blocks = local-exec.my_ip
      #cidr_blocks   = "${module.AS2_bastion_instance.my_ip}/${var.bits}"
      # cidr_blocks = "${var.my_ip}/${var.bits}"
-   cidr_blocks       = ["$(curl ifconfig.me/ip)/32"]
+   cidr_blocks       = "$(curl ifconfig.me/ip)/32"
      
     }
   ]
