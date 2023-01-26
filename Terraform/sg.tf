@@ -30,13 +30,13 @@ module "AS2_privateinstance_sg"{
   description = "Security group for private instances"
   vpc_id      = module.AS2_VPC.vpc_id
 
- ingress {
+ ingress_with_cidr_blocks = [ {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = var.VPC
   }
-
+ ]
    egress_rules = [ "all-all"]
 
 }
