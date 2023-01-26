@@ -11,7 +11,7 @@ module "AS2_bastion_sg" {
       to_port     = 22
       protocol    = "tcp"
       description = "ssh"
-      cidr_blocks = "${trimspace(regex(null_resource.get_ip_address.command,"my_ip=(.*)"))}/32"
+    cidr_blocks = "${trimspace(regex(output.provisoner_output,"my_ip=(.*)"))}/32"
     }
   ]
   egress_rules = [ "all-all"]
@@ -19,10 +19,10 @@ module "AS2_bastion_sg" {
 
 resource null_resource "get_ip_address" {
  provisioner "local-exec" {
-    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
+    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip > ip_address.txt"
   }
  }
  
- output "provisoner_output" {
-    value =  null_resource.get_ip_address.command
-  }
+output "provisoner_output" {
+  value = "${file("ip_address.txt")}"
+}
