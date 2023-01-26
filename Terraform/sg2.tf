@@ -1,12 +1,11 @@
 resource "null_resource" "get_ip_address" {
   provisioner "local-exec" {
-    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip > ip_address.txt"
+    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
   }
 }
 
-
 output "provisoner_output" {
-  value = "${file("ip_address.txt")}"
+  value = "${var.my_ip}"
 }
 
 module "AS2_bastion_sg" {
