@@ -32,6 +32,10 @@ resource "null_resource" "create_key_pair" {
 resource "aws_key_pair" "example" {
   key_name   = var.key_name
   public_key = "${file("AS2key.pub")}"
+
+   depends_on = [
+     null_resource.create_key_pair
+   ]
 }
 
 output "bastion_ip_address" {
