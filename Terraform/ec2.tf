@@ -18,9 +18,11 @@ module "AS2_bastion_instance" {
   vpc_security_group_ids = [module.AS2_bastion_sg.security_group_id]
   subnet_id              = module.AS2_VPC.public_subnets[0]
 
-   network_interface = {
+   network_interface = [
+    {
     associate_with_eip = aws_eip.AS2_eip.id
-  }
+    }
+   ]
 
   tags = {
     Terraform   = "true"
