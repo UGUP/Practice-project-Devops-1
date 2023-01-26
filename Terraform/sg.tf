@@ -17,17 +17,19 @@ module "AS2_bastion_sg" {
      # self = true
     #  cidr_blocks = local-exec.my_ip
      #cidr_blocks   = "${module.AS2_bastion_instance.my_ip}/${var.bits}"
-      cidr_blocks = "${local-exec.my_ip}/${var.bits}"
+      cidr_blocks = "${var.my_ip}/${var.bits}"
     }
   ]
   egress_rules = [ "all-all"]
-
-   provisioner "local-exec" {
-    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
-  }
-
   
 }
+
+  provisioner "local-exec" {
+    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
+    environment = {
+      my_ip= "${var.my_ip}"
+    }
+  }
 
  
 # module "AS2_privateinstance_sg"{
