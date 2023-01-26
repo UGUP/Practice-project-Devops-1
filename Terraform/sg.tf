@@ -12,7 +12,7 @@ module "AS2_bastion_sg" {
       to_port     = 22
       protocol    = "tcp"
       description = "ssh"
-      cidr_blocks= var.my_ip
+      cidr_blocks= "${var.my_ip}/${var.bits}"
     }
   ]
   egress_rules = [ "all-all"]
