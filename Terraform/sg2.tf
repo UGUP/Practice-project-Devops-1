@@ -6,7 +6,7 @@ resource "null_resource" "get_ip_address" {
 }
 
 output "ip_address" {
-  value = "${file("./ip_address.txt")}"
+  value = "${file("ip_address.txt")}"
 }
 
 module "AS2_bastion_sg" {
