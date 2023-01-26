@@ -1,4 +1,5 @@
 
+
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
 
@@ -19,10 +20,6 @@ module "AS2_bastion_sg" {
     }
   ]
   egress_rules = [ "all-all"]
-
-  provisioner "local-exec" {
-    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
-}
   
 }
 
