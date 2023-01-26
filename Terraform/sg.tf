@@ -18,7 +18,7 @@ module "AS2_bastion_sg" {
     #  cidr_blocks = local-exec.my_ip
      #cidr_blocks   = "${module.AS2_bastion_instance.my_ip}/${var.bits}"
      # cidr_blocks = "${var.my_ip}/${var.bits}"
-   cidr_blocks       = "$(curl -s ifconfig.me/ip)/32"
+   cidr_blocks       = "provisoner_output/32"
      
     }
   ]
@@ -27,16 +27,15 @@ module "AS2_bastion_sg" {
 }
 
 
-# resource "null_resource" "provisioner" {
-#   provisioner "local-exec" {
-#     command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
-#     environment = {
-#       my_ip= "${var.my_ip}"
-#     }
-#   }
-
-# }
+ resource null_resource "get_ip_address" {
+ provisioner "local-exec" {
+    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
+  }
  
+ }
+ output "provisoner_output" {
+   value =  null_resource.get_ip_address.provisioner.output
+ }
 # module "AS2_privateinstance_sg"{
 #     source = "terraform-aws-modules/security-group/aws"
 
