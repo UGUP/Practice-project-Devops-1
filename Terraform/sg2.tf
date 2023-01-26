@@ -3,7 +3,7 @@ resource "null_resource" "get_ip_address" {
     command = "touch ip_address.txt && my_ip=$(curl ifconfig.me); echo $my_ip > ip_address.txt"
   }
   count     = 1
-  file      = "ip_address.txt"
+#   file      = "ip_address.txt"
 }
 
 # output "ip_address" {
