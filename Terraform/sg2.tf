@@ -47,8 +47,9 @@ data "http" "my_ip" {
 }
 
 output "my_ip" {
-  value = "${data.http.my_ip.body}"
+   value = "${data.http.my_ip.response.body}"
 }
+
 
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
