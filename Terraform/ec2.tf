@@ -39,3 +39,8 @@ output "eip_id" {
   value = aws_eip.AS2_eip.id
   description = "generated eip id"
 }
+
+output "eip_id_Address" {
+  value = aws_eip.AS2_eip.address
+  description = "generated eip id"
+}
