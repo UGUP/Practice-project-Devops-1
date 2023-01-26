@@ -1,16 +1,20 @@
 resource "null_resource" "get_ip_address" {
   provisioner "local-exec" {
-    command = "touch ip_address.txt && my_ip=$(curl ifconfig.me); echo $my_ip "
+    command = "touch ip_address.txt && my_ip=$(curl ifconfig.me); echo $my_ip =${var.my_ip} "
   }
 #   count     = 1
 #   file      = "ip_address.txt"
 }
 
 output "ip_address" {
-  value = [
-    element(null_resource.get_ip_address.local-exec.command, 0)
-  ]
+  value = var.my_ip
 }
+
+# output "ip_address" {
+#   value = [
+#     element(null_resource.get_ip_address.local-exec.command, 0)
+#   ]
+# }
 
 
 
