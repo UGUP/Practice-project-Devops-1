@@ -12,8 +12,8 @@ module "AS2_bastion_sg" {
       to_port     = 22
       protocol    = "tcp"
       description = "ssh"
-      cidr_blocks = "${module.AS2_bastion_instance.public_ip}/${var.bits}"
-      #ingress_with_self = module.AS2_bastion_instance.bastion_ip_address
+      #cidr_blocks = "${module.AS2_bastion_instance.public_ip}/${var.bits}"
+       ingress_with_self = true
     }
   ]
   egress_rules = [ "all-all"]
