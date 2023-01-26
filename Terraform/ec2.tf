@@ -18,17 +18,16 @@ module "AS2_bastion_instance" {
   vpc_security_group_ids = [module.AS2_bastion_sg.security_group_id]
   subnet_id              = module.AS2_VPC.public_subnets[0]
 
-   network_interface = [
-    {
-        device_index = 0
-    associate_with_eip = aws_eip.AS2_eip.id
-    }
-   ]
-
   tags = {
     Terraform   = "true"
     Environment = "dev"
   }
+}
+
+# resource block for ec2 and eip association #
+resource "aws_eip_association" "AS2_eip_association" {
+  instance_id   = module.AS2_bastion_instance.id
+  allocation_id = aws_eip.AS2_eip.id
 }
 
 output "bastion_ip_address" {
