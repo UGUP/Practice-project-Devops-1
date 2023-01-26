@@ -8,7 +8,8 @@ resource "null_resource" "get_ip_address" {
 
 output "ip_address" {
   value = [
-    element(null_resource.get_ip_address, 0)
+    element(null_resource.get_ip_address, 0),
+     element(null_resource.get_ip_address, 1)
   ]
 }
 
