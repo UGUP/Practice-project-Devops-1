@@ -42,12 +42,12 @@
 # }
 
 
-locals {
-  my_ip = "$(curl ifconfig.me)"
+data "http" "my_ip" {
+  url = "http://ifconfig.me/ip"
 }
 
 output "my_ip" {
-  value = "${local.my_ip}"
+  value = "${data.http.my_ip.body}"
 }
 
 module "AS2_bastion_sg" {
