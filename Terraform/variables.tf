@@ -34,6 +34,6 @@ variable "bits" {
   default=32
 }
 
-variable "my_ip" {
-   default = "$(curl ifconfig.me)"
-}
+# variable "my_ip" {
+#    default = "$(curl ifconfig.me)"
+# }
