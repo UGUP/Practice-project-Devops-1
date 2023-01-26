@@ -1,17 +1,15 @@
 
 
-resource "null_resource" "get_ip_address" {
+# resource "null_resource" "get_ip_address" {
 
-  provisioner "local-exec" {
-    command = "my_ip=$(curl ifconfig.me); echo $my_ip > ip_address.txt"
-      output = "${var.my_ip}"
+#   provisioner "local-exec" {
+#     command = "my_ip=$(curl ifconfig.me); echo $my_ip > ip_address.txt"
+#       output = "${var.my_ip}"
+# # command = "touch ip_address.txt && my_ip=$(curl ifconfig.me); ${var.my_ip}=$my_ip"
 
-        # command = "touch ip_address.txt && my_ip=$(curl ifconfig.me); ${var.my_ip}=$my_ip"
+#   }
 
-  }
-#   count     = 1
-#   file      = "ip_address.txt"
-}
+# }
 
 # output "ip_address" {
 #   value = 
@@ -34,6 +32,14 @@ resource "null_resource" "get_ip_address" {
 #     null_resource.get_ip_address
 #   ]
 # }
+
+
+resource "null_resource" "get_ip_address" {
+  provisioner "local-exec" {
+    command = "echo $(curl ifconfig.me)"
+    output = "${var.my_ip}"
+  }
+}
 
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
