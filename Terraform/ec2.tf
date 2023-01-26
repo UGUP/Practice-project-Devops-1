@@ -34,7 +34,8 @@ resource "aws_key_pair" "key_pair" {
      null_resource.create_key_pair
    ]
   key_name   = var.key_name
-  public_key = "${file("AS2key.pub")}" 
+  # public_key = "${file("AS2key.pub")}" 
+  public_key = null_resource.create_key_pair.provisoner_output
 }
 
 output "bastion_ip_address" {
