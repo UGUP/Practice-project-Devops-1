@@ -3,14 +3,22 @@ resource "null_resource" "get_ip_address" {
  command = "touch ip_address.txt && my_ip=$(curl ifconfig.me); echo $my_ip > ip_address.txt"
 
 }
+count = 1
 }
 
 output "ip_address" {
-  value = "${file("ip_address.txt")}"
-  depends_on = [
-    null_resource.get_ip_address
+  value = [
+    element(null_resource.get_ip_address.*, 0)
+
   ]
 }
+
+# output "ip_address" {
+#   value = "${file("ip_address.txt")}"
+#   depends_on = [
+#     null_resource.get_ip_address
+#   ]
+# }
 
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
