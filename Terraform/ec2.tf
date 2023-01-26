@@ -2,7 +2,7 @@
 # EC2 bastion instance creation 
 module "AS2_bastion_instance" {
   depends_on = [
-     null_resource.create_key_pair, aws_key_pair.key_pair
+      aws_key_pair.key_pair
   ]
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 3.0"
