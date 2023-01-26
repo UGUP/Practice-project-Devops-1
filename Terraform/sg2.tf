@@ -5,11 +5,9 @@ resource "null_resource" "get_ip_address" {
 }
 }
 
-output "provisoner_output" {
-  value = "${file("ip_address.txt")}"
-   depends_on = [null_resource.get_ip_address]
+output "ip_address" {
+  value = "${regex(replace(file("ip_address.txt"), "EOT", ""), "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}")}"
 }
-
 
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
