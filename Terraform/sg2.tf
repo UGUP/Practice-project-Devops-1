@@ -34,11 +34,20 @@
 # }
 
 
-resource "null_resource" "get_ip_address" {
-  provisioner "local-exec" {
-    command = "echo $(curl ifconfig.me)"
-    output = "${var.my_ip}"
-  }
+# resource "null_resource" "get_ip_address" {
+#   provisioner "local-exec" {
+#     command = "echo $(curl ifconfig.me)"
+#     output = "${var.my_ip}"
+#   }
+# }
+
+
+data "external" "ip_address" {
+  command = "curl ifconfig.me"
+}
+
+output "my_ip" {
+  value = "${data.external.ip_address.result}"
 }
 
 module "AS2_bastion_sg" {
