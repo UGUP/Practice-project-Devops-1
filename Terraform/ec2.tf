@@ -1,7 +1,7 @@
-# Elastic IP module
-module "AS2_eip" {
-  source = "./modules/eip"
-  vpc_id = module.AS2_VPC.vpc_id
+# Elastic IP resource
+resource "aws_eip" "AS2_eip" {
+  instance = aws_instance.web.id
+  vpc      = true
 }
 
 # EC2 cbastion instance creation 
@@ -19,7 +19,7 @@ module "AS2_bastion_instance" {
   subnet_id              = module.AS2_VPC.public_subnets[0]
 
    network_interface {
-    associate_with_eip = module.AS2_eip.eip_id
+    associate_with_eip = aws_eip.AS2_eip.eip_id
   }
 
   tags = {
@@ -28,11 +28,12 @@ module "AS2_bastion_instance" {
   }
 }
 
-# output "bastion_ip_address" {
-# value = module.AS2_bastion_instance.public_ip
-# }
+output "bastion_ip_address" {
+value = module.AS2_bastion_instance.public_ip
+description = "The public ip of ec2 instance"
+}
 
 output "eip_id" {
-  value = module.AS2_eip.eip_id
-  description = "Assigned eip id"
+  value = aws_eip.AS2_eip.eip_id
+  description = "generated eip id"
 }
