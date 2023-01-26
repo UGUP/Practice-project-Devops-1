@@ -34,6 +34,6 @@ description = "The public ip of ec2 instance"
 }
 
 output "eip_id" {
-  value = aws_eip.AS2_eip.eip_id
+  value = aws_eip.AS2_eip.id
   description = "generated eip id"
 }
