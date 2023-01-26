@@ -1,11 +1,11 @@
 resource "null_resource" "get_ip_address" {
  provisioner "local-exec" {
-  command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip > ip_address.txt"
+  command = "my_ip=$(curl ifconfig.me); echo $my_ip > ip_address.txt"
 }
 }
 
 output "ip_address" {
-  value = "${regex(file("./ip_address.txt"), "my_ip=(.*)")}"
+  value = "${file("./ip_address.txt")}"
   depends_on = [null_resource.get_ip_address]
 }
 
