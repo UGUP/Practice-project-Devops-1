@@ -1,3 +1,13 @@
+resource "null_resource" "get_ip_address" {
+  provisioner "local-exec" {
+    command = "echo 'my_ip=$(curl ifconfig.me)' > ip_address.txt"
+  }
+}
+
+output "provisoner_output" {
+  value = "${file("ip_address.txt")}"
+}
+
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
 
@@ -11,18 +21,8 @@ module "AS2_bastion_sg" {
       to_port     = 22
       protocol    = "tcp"
       description = "ssh"
-    cidr_blocks = "${trimspace(regex(output.provisoner_output,"my_ip=(.*)"))}/32"
+      cidr_blocks = "${trimspace(regex(output.provisoner_output,"my_ip=(.*)"))}/32"
     }
   ]
-  egress_rules = [ "all-all"]
-}
-
-resource null_resource "get_ip_address" {
- provisioner "local-exec" {
-    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip > ip_address.txt"
-  }
- }
- 
-output "provisoner_output" {
-  value = "${file("ip_address.txt")}"
+  egress_rules = ["all-all"]
 }
