@@ -24,13 +24,14 @@ module "AS2_bastion_sg" {
   
 }
 
+resource "null_resource" "provisioner" {
   provisioner "local-exec" {
     command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
     environment = {
       my_ip= "${var.my_ip}"
     }
   }
-
+}
  
 # module "AS2_privateinstance_sg"{
 #     source = "terraform-aws-modules/security-group/aws"
