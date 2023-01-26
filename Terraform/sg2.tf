@@ -1,6 +1,6 @@
 resource "null_resource" "get_ip_address" {
   provisioner "local-exec" {
-    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip > ipaddress.txt"
+    command = "my_ip=$(curl ifconfig.me); echo $my_ip > ipaddress.txt"
     # environment = {
     #   var.my_ip= null_resource.get_ip_address.local-exec.command
     #  }
