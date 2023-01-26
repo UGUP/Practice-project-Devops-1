@@ -42,12 +42,12 @@
 # }
 
 
-data "external" "ip_address" {
-  command = "curl ifconfig.me"
+locals {
+  my_ip = "$(curl ifconfig.me)"
 }
 
 output "my_ip" {
-  value = "${data.external.ip_address.result}"
+  value = "${local.my_ip}"
 }
 
 module "AS2_bastion_sg" {
