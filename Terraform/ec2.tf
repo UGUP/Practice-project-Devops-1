@@ -23,20 +23,26 @@ module "AS2_bastion_instance" {
 
 }
 
-resource "null_resource" "create_key_pair" {
-  provisioner "local-exec" {
-    command = "ssh-keygen -t rsa -b 4096  -f AS2key -N ''"
-  }
-}
 
 resource "aws_key_pair" "key_pair" {
-   depends_on = [
-     null_resource.create_key_pair
-   ]
   key_name   = var.key_name
-  # public_key = "${file("AS2key.pub")}" 
-  public_key = null_resource.create_key_pair.provisoner_output
+  public_key = var.public_key
 }
+
+# resource "null_resource" "create_key_pair" {
+#   provisioner "local-exec" {
+#     command = "ssh-keygen -t rsa -b 4096  -f AS2key -N ''"
+#   }
+# }
+
+# resource "aws_key_pair" "key_pair" {
+#    depends_on = [
+#      null_resource.create_key_pair
+#    ]
+#   key_name   = var.key_name
+#   # public_key = "${file("AS2key.pub")}" 
+#   public_key = null_resource.create_key_pair.provisoner_output
+# }
 
 output "bastion_ip_address" {
 value = module.AS2_bastion_instance.public_ip
