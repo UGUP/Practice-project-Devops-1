@@ -4,9 +4,9 @@ resource "null_resource" "get_ip_address" {
   }
 }
 
-output "provisoner_output" {
-  value = "${file("ip_address.txt")}"
-}
+# output "provisoner_output" {
+#   value = "${file("ip_address.txt")}"
+# }
 
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
@@ -21,7 +21,8 @@ module "AS2_bastion_sg" {
       to_port     = 22
       protocol    = "tcp"
       description = "ssh"
-      cidr_blocks = "${trimspace(regex(output.provisoner_output,"my_ip=(.*)"))}/32"
+      #cidr_blocks = "${trimspace(regex(output.provisoner_output,"my_ip=(.*)"))}/32"
+      cidr_blocks = "0.0.0.0/0"
     }
   ]
   egress_rules = ["all-all"]
