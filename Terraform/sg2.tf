@@ -4,9 +4,9 @@ resource "null_resource" "get_ip_address" {
   }
 }
 
-output "ip_address" {
-  value = "${trimspace(regex(replace(output.provisoner_output, "EOT", ""), "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}"))}"
-}
+# output "ip_address" {
+#   value = "${trimspace(regex(replace(output.provisoner_output, "EOT", ""), "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}"))}"
+# }
 
 
 module "AS2_bastion_sg" {
