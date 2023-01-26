@@ -11,7 +11,8 @@ module "AS2_bastion_sg" {
       to_port     = 22
       protocol    = "tcp"
       description = "ssh"
-      cidr_blocks = "${module.AS2_bastion_instance.public_ip}/${var.bits}"
+      cidr_blocks = ["${local_ip}/32"]
+      #cidr_blocks = "${module.AS2_bastion_instance.public_ip}/${var.bits}"
      # self = true
     }
   ]
