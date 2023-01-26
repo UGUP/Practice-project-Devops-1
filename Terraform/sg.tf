@@ -16,7 +16,7 @@ module "AS2_bastion_sg" {
       # cidr_blocks = ["${local_ip}/32"]
       #cidr_blocks = "${module.AS2_bastion_instance.public_ip}/${var.bits}"
      # self = true
-     cidr_blocks   = "${module.AS2_bastion_instance.my_ip}/32"
+     cidr_blocks   = "${module.AS2_bastion_instance.my_ip}/${var.bits}"
     }
   ]
   egress_rules = [ "all-all"]
