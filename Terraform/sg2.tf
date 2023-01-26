@@ -1,14 +1,12 @@
 resource "null_resource" "get_ip_address" {
   provisioner "local-exec" {
     command = "my_ip=$(curl ifconfig.me); echo $my_ip > ipaddress.txt"
-    # environment = {
-    #   var.my_ip= null_resource.get_ip_address.local-exec.command
-    #  }
   }
 }
 
 output "provisoner_output" {
-  value = "${var.my_ip}"
+value = "${file("./ipaddress.txt")}"
+ depends_on = [null_resource.get_ip_address]
 }
 
 module "AS2_bastion_sg" {
