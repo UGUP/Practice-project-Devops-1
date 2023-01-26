@@ -4,12 +4,6 @@ resource "null_resource" "get_ip_address" {
 }
 }
 
-output "ip_address" {
-  value = "${file("./ip_address.txt")}"
-  depends_on = [
-    null_resource.get_ip_address
-  ]
-}
 
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
@@ -29,4 +23,12 @@ module "AS2_bastion_sg" {
     }
   ]
   egress_rules = ["all-all"]
+}
+
+
+output "ip_address" {
+  value = "${file("./ip_address.txt")}"
+  depends_on = [
+    null_resource.get_ip_address
+  ]
 }
