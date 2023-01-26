@@ -1,10 +1,16 @@
 resource "null_resource" "get_ip_address" {
  provisioner "local-exec" {
- command = "touch ./ip_address.txt && my_ip=$(curl ifconfig.me); echo $my_ip > ip_address.txt"
+ command = "touch ip_address.txt && my_ip=$(curl ifconfig.me); echo $my_ip > ip_address.txt"
 
 }
 }
 
+output "ip_address" {
+  value = "${file("ip_address.txt")}"
+  depends_on = [
+    null_resource.get_ip_address
+  ]
+}
 
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
@@ -27,9 +33,3 @@ module "AS2_bastion_sg" {
 }
 
 
-output "ip_address" {
-  value = "${file("./ip_address.txt")}"
-  depends_on = [
-    null_resource.get_ip_address
-  ]
-}
