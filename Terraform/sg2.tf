@@ -1,12 +1,13 @@
 resource "null_resource" "get_ip_address" {
   provisioner "local-exec" {
-    command = "echo 'my_ip=$(curl ifconfig.me)' > ip_address.txt"
+    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip > ip_address.txt"
   }
 }
 
-# output "provisoner_output" {
-#   value = "${file("ip_address.txt")}"
-# }
+
+output "provisoner_output" {
+  value = "${file("ip_address.txt")}"
+}
 
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
