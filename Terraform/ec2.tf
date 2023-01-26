@@ -22,9 +22,7 @@ module "AS2_bastion_instance" {
     Environment = "dev"
   }
 
-  provisioner "local-exec" {
-    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
-  }
+
 
 }
 

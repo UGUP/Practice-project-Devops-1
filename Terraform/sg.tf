@@ -1,5 +1,4 @@
 
-
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
 
@@ -16,12 +15,18 @@ module "AS2_bastion_sg" {
       # cidr_blocks = ["${local_ip}/32"]
       #cidr_blocks = "${module.AS2_bastion_instance.public_ip}/${var.bits}"
      # self = true
-     cidr_blocks   = "${module.AS2_bastion_instance.my_ip}/${var.bits}"
+    #  cidr_blocks = local-exec.my_ip
+     #cidr_blocks   = "${module.AS2_bastion_instance.my_ip}/${var.bits}"
+      cidr_blocks = "${local-exec.my_ip}/${var.bits}"
     }
   ]
   egress_rules = [ "all-all"]
   
 }
+
+  provisioner "local-exec" {
+    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
+  }
 
 # module "AS2_privateinstance_sg"{
 #     source = "terraform-aws-modules/security-group/aws"
