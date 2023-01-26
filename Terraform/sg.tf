@@ -1,43 +1,26 @@
 
-# module "AS2_bastion_sg" {
-#   source = "terraform-aws-modules/security-group/aws"
+module "AS2_bastion_sg" {
+  source = "terraform-aws-modules/security-group/aws"
 
-#   name        = "AS2_bastion_sg"
-#   description = "Security group for bastion instance"
-#   vpc_id      = module.AS2_VPC.vpc_id
+  name        = "AS2_bastion_sg"
+  description = "Security group for bastion instance"
+  vpc_id      = module.AS2_VPC.vpc_id
 
-#   ingress_with_cidr_blocks = [
-#     {
-#       from_port   = 22
-#       to_port     = 22
-#       protocol    = "tcp"
-#       description = "ssh"
-#       # cidr_blocks = ["${local_ip}/32"]
-#       #cidr_blocks = "${module.AS2_bastion_instance.public_ip}/${var.bits}"
-#      # self = true
-#     #  cidr_blocks = local-exec.my_ip
-#      #cidr_blocks   = "${module.AS2_bastion_instance.my_ip}/${var.bits}"
-#   #    # cidr_blocks = "${var.my_ip}/${var.bits}"
-#   #  cidr_blocks = "${null_resource.get_ip_address.provisioner.output}"
-#  # cidr_blocks = "${trimspace(regex(null_resource.get_ip_address.provisioner.command,"my_ip=(.*)"))}/32"
-#     cidr_blocks = "${trimspace(regex(local-exec.get_ip_address.output,"my_ip=(.*)"))}/32" 
-#     }
-#   ]
-#   egress_rules = [ "all-all"]
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      description = "ssh"
+      cidr_blocks= var.my_ip
+    }
+  ]
+  egress_rules = [ "all-all"]
 
   
-# }
+}
 
-#  resource null_resource "get_ip_address" {
-#  provisioner "local-exec" {
-#     command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
-#   }
-#  }
- 
 
-# output "provisoner_output" {
-#   value =  local-exec.get_ip_address.output
-# }
 
 
 # # module "AS2_privateinstance_sg"{

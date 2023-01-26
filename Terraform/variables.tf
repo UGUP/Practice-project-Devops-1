@@ -36,5 +36,5 @@ variable "bits" {
 
 variable "my_ip" {
   type = string
-  default = "0.0.0.0/16"
+  default = "103.66.208.91"
 }
