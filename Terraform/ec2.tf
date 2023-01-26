@@ -1,8 +1,8 @@
-# Elastic IP resource
-resource "aws_eip" "AS2_eip" {
-  #instance = module.AS2_bastion_instance.id
-  vpc      = true
-}
+# # Elastic IP resource
+# resource "aws_eip" "AS2_eip" {
+#   #instance = module.AS2_bastion_instance.id
+#   vpc      = true
+# }
 
 # EC2 cbastion instance creation 
 module "AS2_bastion_instance" {
@@ -22,30 +22,29 @@ module "AS2_bastion_instance" {
     Environment = "dev"
   }
 
-# provisioner "local-exec" {
-#     command = "MYIP=$(curl ifconfig.me); echo MYIP=$MYIP"
-#   }
-
+  provisioner "local-exec" {
+    command = "my_ip=$(curl ifconfig.me); echo my_ip=$my_ip"
+  }
 
 }
 
-# resource block for ec2 and eip association #
-resource "aws_eip_association" "AS2_eip_association" {
-  instance_id   = module.AS2_bastion_instance.id
-  allocation_id = aws_eip.AS2_eip.id
-}
+# # resource block for ec2 and eip association #
+# resource "aws_eip_association" "AS2_eip_association" {
+#   instance_id   = module.AS2_bastion_instance.id
+#   allocation_id = aws_eip.AS2_eip.id
+# }
 
 output "bastion_ip_address" {
 value = module.AS2_bastion_instance.public_ip
 description = "The public ip of ec2 instance"
 }
 
-output "eip_id" {
-  value = aws_eip.AS2_eip.id
-  description = "generated eip id"
-}
+# output "eip_id" {
+#   value = aws_eip.AS2_eip.id
+#   description = "generated eip id"
+# }
 
-output "eip_id_Address" {
-  value = aws_eip.AS2_eip.address
-  description = "generated eip id"
-}
+# output "eip_id_Address" {
+#   value = aws_eip.AS2_eip.address
+#   description = "generated eip id"
+# }
