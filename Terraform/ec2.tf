@@ -1,6 +1,6 @@
 # Elastic IP resource
 resource "aws_eip" "AS2_eip" {
-  instance = module.AS2_bastion_instance.id
+  #instance = module.AS2_bastion_instance.id
   vpc      = true
 }
 
