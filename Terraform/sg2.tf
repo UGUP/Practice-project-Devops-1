@@ -5,7 +5,7 @@ resource "null_resource" "get_ip_address" {
 }
 
 output "ip_address" {
-  value = "${file("./file.txt")}"
+  value = "${file("./ip_address.txt")}"
   depends_on = [null_resource.get_ip_address]
 }
 
