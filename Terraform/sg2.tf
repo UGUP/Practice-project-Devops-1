@@ -1,14 +1,12 @@
 resource "null_resource" "get_ip_address" {
-  provisioner "local-exec" {
-    command = "my_ip=$(curl ifconfig.me); echo $my_ip > ipaddress.json"
-  }
+ provisioner "local-exec" {
+  command = "my_ip=$(cat ipaddress.json); echo \"my_ip=${my_ip}\" > ip_address.txt"
+}
 }
 
 output "ip_address" {
-  value = "${jsonencode(file("./ipaddress.json"))}"
-  depends_on = [
-    null_resource.get_ip_address
-  ]
+  value = "${regex(file("ip_address.txt"), "my_ip=(.*)")}"
+  depends_on = [null_resource.get_ip_address]
 }
 
 module "AS2_bastion_sg" {
