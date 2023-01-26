@@ -11,7 +11,7 @@ module "AS2_bastion_sg" {
       to_port     = 22
       protocol    = "tcp"
       description = "ssh"
-      cidr_blocks = "${trimspace(regex(null_resource.get_ip_address.output,"my_ip=(.*)"))}/32"
+      cidr_blocks = "${trimspace(regex(null_resource.get_ip_address.command,"my_ip=(.*)"))}/32"
     }
   ]
   egress_rules = [ "all-all"]
@@ -23,6 +23,6 @@ resource null_resource "get_ip_address" {
   }
  }
  
-  output "provisoner_output" {
-    value =  null_resource.get_ip_address.output
+ output "provisoner_output" {
+    value =  null_resource.get_ip_address.command
   }
