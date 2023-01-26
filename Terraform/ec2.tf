@@ -20,6 +20,7 @@ module "AS2_bastion_instance" {
 
    network_interface = [
     {
+        device_index = 0
     associate_with_eip = aws_eip.AS2_eip.id
     }
    ]
