@@ -1,6 +1,7 @@
 resource "null_resource" "get_ip_address" {
  provisioner "local-exec" {
- command = "touch ip_address.txt && my_ip=$(curl ifconfig.me); echo $my_ip > ip_address.txt"
+ command = "touch ./ip_address.txt && my_ip=$(curl ifconfig.me); echo $my_ip > ip_address.txt"
+
 }
 }
 
