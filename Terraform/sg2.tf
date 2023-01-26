@@ -23,7 +23,7 @@ module "AS2_bastion_sg" {
       protocol    = "tcp"
       description = "ssh"
       #cidr_blocks = "${trimspace(regex(output.provisoner_output,"my_ip=(.*)"))}/32"
-      cidr_blocks = "0.0.0.0/0"
+      cidr_blocks = "0.0.0.0/16"
     }
   ]
   egress_rules = ["all-all"]
