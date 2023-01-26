@@ -5,7 +5,6 @@ module "AS2_bastion_sg" {
   description = "Security group for bastion instance"
   vpc_id      = module.AS2_VPC.vpc_id
 
-  ingress_cidr_blocks      = [var.VPC]
   ingress_with_cidr_blocks = [
     {
       from_port   = 22
