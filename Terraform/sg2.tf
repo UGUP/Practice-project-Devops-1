@@ -42,14 +42,27 @@
 # }
 
 
-data "http" "my_ip" {
-  url = "http://ifconfig.me/ip"
+# data "http" "my_ip" {
+#   url = "http://ifconfig.me/ip"
+# }
+
+# output "my_ip" {
+#    value = "${data.http.my_ip.body}"
+# }
+
+
+resource "null_resource" "get_ip_address" {
+  provisioner "local-exec" {
+    command = "my_ip=$(curl ifconfig.me); echo $my_ip > ip_address.txt"
+  }
 }
 
-output "my_ip" {
-   value = "${data.http.my_ip.body}"
+output "ip_address" {
+  value = "${file("ip_address.txt")}"
+  depends_on = [
+    null_resource.get_ip_address
+  ]
 }
-
 
 module "AS2_bastion_sg" {
   source = "terraform-aws-modules/security-group/aws"
