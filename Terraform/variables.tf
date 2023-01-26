@@ -27,7 +27,7 @@ variable "instance_type" {
 }
 
 variable "key_name" {
-  default = "test2"
+  default = "AS2key"
 }
 
 variable "bits" {
@@ -37,4 +37,8 @@ variable "bits" {
 variable "my_ip" {
   type = string
   default = "103.66.208.91"
+}
+
+variable "public_key" {
+  default ="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCdfj5d/GPQWpT3lFOpr5+ATlekViph1lyQP9LYqH6SiJSEd6j5jU6EgrO8Xv44nKttcBnheVly3x8EF30Lun1cZpbZFdjiUA8DafMhDnenUocnb+fCiqadZIUeOvi8sGfE2ksDsQAt5NUmmSWP4OKpXiGI1lEdbKW6K/dP9GjDjKnUYff+68rrVcZB8+YvEf4Qs6bBMXAeaq7h4nrNAXUdxCFY8NasFVfncpFMgRsijy7XoOCrBkCPhJ+K0bfpnwAhfKVp95c28uFUuw+mESk8SBpnSODRPZNgCfXav1nqF5d0m888UZiSVLyC7M76CmW4737U5EAWb+8ERkl1toZ ubuntu@ip-172-31-26-52"
 }
