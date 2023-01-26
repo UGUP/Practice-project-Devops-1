@@ -5,7 +5,7 @@ resource "null_resource" "get_ip_address" {
 }
 
 output "ip_address" {
-  value = "${regex(file("ip_address.txt"), "my_ip=(.*)")}"
+  value = "${regex(file("./ip_address.txt"), "my_ip=(.*)")}"
   depends_on = [null_resource.get_ip_address]
 }
 
