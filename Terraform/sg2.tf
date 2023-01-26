@@ -1,9 +1,11 @@
 
-resource "null_resource" "get_ip_address" {
     variable "my_ip" {
   type = string
  
 }
+
+resource "null_resource" "get_ip_address" {
+
   provisioner "local-exec" {
     command = "my_ip=$(curl ifconfig.me); ${var.my_ip}=$my_ip"
         # command = "touch ip_address.txt && my_ip=$(curl ifconfig.me); ${var.my_ip}=$my_ip"
