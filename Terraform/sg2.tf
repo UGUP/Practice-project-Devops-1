@@ -10,6 +10,9 @@ resource "null_resource" "get_ip_address" {
 
 output "ip_address" {
   value = var.my_ip
+  depends_on = [
+    null_resource.get_ip_address
+  ]
 }
 
 # output "ip_address" {
