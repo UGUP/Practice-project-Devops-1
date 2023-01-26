@@ -5,7 +5,7 @@ resource "null_resource" "get_ip_address" {
 }
 
 output "provisoner_output" {
-value = "${file("./ipaddress.txt")}"
+value = trimspace(replace(file("./ipaddress.txt"), "EOT", ""))
  depends_on = [null_resource.get_ip_address]
 }
 
