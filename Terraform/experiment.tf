@@ -1,99 +1,49 @@
 
-# EC2 bastion instance creation 
-module "AS2_bastion_instance" {
+# # EC2 bastion instance creation 
+# module "AS2_bastion_instance" {
 
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 3.0"
+#   source  = "terraform-aws-modules/ec2-instance/aws"
+#   version = "~> 3.0"
 
-  name = "AS2_bastion_instance"
+#   name = "AS2_bastion_instance"
 
-  ami                    = var.ami
-  instance_type          = var.instance_type
-  key_name               =  aws_key_pair.key_pair.key_name
-  monitoring             = true
-  vpc_security_group_ids = [module.AS2_bastion_sg.security_group_id]
-  subnet_id              = module.AS2_VPC.public_subnets[0]
+#   ami                    = var.ami
+#   instance_type          = var.instance_type
+#   key_name               =  aws_key_pair.key_pair.key_name
+#   monitoring             = true
+#   vpc_security_group_ids = [module.AS2_bastion_sg.security_group_id]
+#   subnet_id              = module.AS2_VPC.public_subnets[0]
 
-  tags = {
-    Terraform   = "true"
-    Environment = "dev"
-  }
+#   tags = {
+#     Terraform   = "true"
+#     Environment = "dev"
+#   }
 
-}
-
-
-# EC2 Jenkins instance creation 
-module "AS2_Jenkins_instance" {
-
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 3.0"
-
-  name = "AS2_Jenkins_instance"
-
-  ami                    = var.ami
-  instance_type          = var.instance_type
-  key_name               =  aws_key_pair.key_pair.key_name
-  monitoring             = true
-  vpc_security_group_ids = [module.AS2_privateinstance_sg.security_group_id]
-  subnet_id              = module.AS2_VPC.private_subnets[0]
-
-  tags = {
-    Terraform   = "true"
-    Environment = "dev"
-  }
-
-}
+# }
 
 
-# EC2 Jenkins instance creation 
-module "AS2_App_instance" {
+# resource "aws_key_pair" "key_pair" {
+#   key_name   = var.key_name
+#   public_key = var.public_key
+# }
 
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 3.0"
+# # resource "null_resource" "create_key_pair" {
+# #   provisioner "local-exec" {
+# #     command = "ssh-keygen -t rsa -b 4096  -f AS2key -N ''"
+# #   }
+# # }
 
-  name = "AS2_app_instance"
+# # resource "aws_key_pair" "key_pair" {
+# #    depends_on = [
+# #      null_resource.create_key_pair
+# #    ]
+# #   key_name   = var.key_name
+# #   # public_key = "${file("AS2key.pub")}" 
+# #   public_key = null_resource.create_key_pair.provisoner_output
+# # }
 
-  ami                    = var.ami
-  instance_type          = var.instance_type
-  key_name               =  aws_key_pair.key_pair.key_name
-  monitoring             = true
-  vpc_security_group_ids = [module.AS2_privateinstance_sg.security_group_id]
-  subnet_id              = module.AS2_VPC.purivate_subnets[1]
-
-  tags = {
-    Terraform   = "true"
-    Environment = "dev"
-  }
-
-}
-
-
-
-resource "aws_key_pair" "key_pair" {
-  key_name   = var.key_name
-  public_key = var.public_key
-}
-
-
-
-
-
-
-
-
-output "bastion_ip_address" {
-value = module.AS2_bastion_instance.public_ip
-description = "The public ip of bastion ec2 instance"
-}
-
-
-output "jenkins_private_ip_address" {
-value = module.AS2_Jenkins_instance.private_ip
-description = "The private ip of jenkins ec2 instance"
-}
-
-output "app_private_ip_address" {
-value = module.AS2_App_instance.private_ip
-description = "The private ip of app ec2 instance"
-}
+# output "bastion_ip_address" {
+# value = module.AS2_bastion_instance.public_ip
+# description = "The public ip of ec2 instance"
+# }
 
