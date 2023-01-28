@@ -26,3 +26,5 @@
       command: sudo usermod -aG docker ${USER}
     - name: Install awscli 
       command: sudo apt install awscli
+    - name: To avoid permission errors on private instances
+      command: sudo chmod 777 /var/run/docker.sock
