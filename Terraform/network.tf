@@ -11,7 +11,7 @@ module "AS2_VPC" {
 
   private_subnets = [var.private-subnet1,var.private-subnet2]
   public_subnets  = [var.public-subnet1,var.public-subnet2]
-  # Added single NAT gateway to create only 1 NAT gateway in AZ-1 as per the requirement
+  # Added single NAT gateway to create only 1 NAT gateway in AZ-1a as per the requirement
   single_nat_gateway= true
   azs             = ["us-east-1a","us-east-1b"]
 
@@ -20,8 +20,6 @@ module "AS2_VPC" {
 
   enable_nat_gateway = true
   enable_vpn_gateway = true
-
-
 
   tags = {
     name= "AS2_VPC"
