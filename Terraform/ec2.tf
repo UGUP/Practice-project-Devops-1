@@ -58,7 +58,7 @@ module "AS2_App_instance" {
   key_name               =  aws_key_pair.key_pair.key_name
   monitoring             = true
   vpc_security_group_ids = [module.AS2_privateinstance_sg.security_group_id]
-  subnet_id              = module.AS2_VPC.purivate_subnets[1]
+  subnet_id              = module.AS2_VPC.private_subnets[1]
 
   tags = {
     Terraform   = "true"
