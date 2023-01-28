@@ -9,7 +9,11 @@
     - name: Install a few prerequisite packages which let apt use packages over HTTPS
       command: sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
     - name: Add the GPG key for the official Docker repository to your system
-      command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+      command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /tmp/docker.gpg
+      register: curl_result
+    - name: Add Docker GPG key
+      command: sudo apt-key add /tmp/docker.gpg
+      when: curl_result.rc == 0
     - name: Add the Docker repository to APT sources
       command: sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
     - name: Make sure you are about to install from the Docker repo instead of the default Ubuntu repo
