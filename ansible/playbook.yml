@@ -24,3 +24,5 @@
       command: sudo systemctl status docker
     - name: Add your username to the docker group
       command: sudo usermod -aG docker ${USER}
+    - name: Install awscli 
+      command: sudo apt install awscli
