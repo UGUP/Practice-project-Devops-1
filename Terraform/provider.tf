@@ -9,7 +9,7 @@ terraform {
 
 # Initializing the s3 bucket  for backend state store.
 backend "s3" {
-    bucket = "as2-project"
+    bucket = "as2-assignment"
     key    = "state/terraform.tfstate"
     region = "us-east-1"
   }
