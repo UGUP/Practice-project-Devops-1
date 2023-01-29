@@ -36,7 +36,7 @@ variable "bits" {
 
 variable "my_ip" {
   type = string
-  default = "103.66.208.91"
+  default = "106.196.103.143"
 }
 
 variable "public_key" {
